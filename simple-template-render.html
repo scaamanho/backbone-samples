@@ -177,9 +177,18 @@
         sample.lista.add(sample.demo5);
         sample.lista.add(sample.demo6);
 
-        //Creamos vistas
+        //Creamos vistas para cada objeto de la coleccion
         var vistas = new Array();
-        sample.view1 = new sample.DemoView({model: sample.demo1});
+        sample.lista.forEach(function(model){
+          vistas.push(new sample.DemoView({model: model}));
+        });
+        
+        //Rederizamos las vistas y las añadimos al contenedor
+        vistas.forEach(function(vista){
+          $('#main-panel').append(vista.render().el);
+        });
+        
+        /*sample.view1 = new sample.DemoView({model: sample.demo1});
         vistas.push(sample.view1);
         sample.view2 = new sample.DemoView({model: sample.demo2});
         vistas.push(sample.view2);
@@ -191,12 +200,7 @@
         vistas.push(sample.view5);
         sample.view6 = new sample.DemoView({model: sample.demo6});
         vistas.push(sample.view6);
-
-        //Rederizamos las vistas y las añadimos al contenedor
-        vistas.forEach(function(vista){
-          $('#main-panel').append(vista.render().el);
-        });
-        /*$('#main-panel').append(sample.view1.render().el);
+        $('#main-panel').append(sample.view1.render().el);
         $('#main-panel').append(sample.view2.render().el);
         $('#main-panel').append(sample.view3.render().el);
         $('#main-panel').append(sample.view4.render().el);
